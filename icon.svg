@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 510 510" version="1.1" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.5;">
+  <style>
+    .rd-w { --color-bg: rgb(102,252,241); --color-border: white; }
+    .bw { --color-bg: rgb(6,6,6); --color-border: white; }
+  </style>
+  <defs>
+    <g id="b">
+      <rect width="30" height="30" class="block-bg" style="fill: var(--color-bg); stroke: var(--color-border); stroke-width: 1px;" x="120" y="150" />
+    </g>
+  </defs>
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,150,30)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,180,0)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,210,0)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,150,90)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,180,60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,210,60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,150,60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,180,30)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,210,30)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,150,120)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,180,90)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,210,90)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,150,150)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,180,120)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,240,60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,240,30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,150,180)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,180,150)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,210,120)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,90)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,300,30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,60)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,150,0)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,150,210)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,180,180)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,210,150)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,120)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,300,60)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,90)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,150,240)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,180,210)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,210,180)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,150)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,300,90)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,120)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,150,-30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,210,-30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,180,-30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,-30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,0)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,-30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,0)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,300,0)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,270,30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,180,-60)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,210,-60)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,240,-60)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,360,30)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,330,0)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,300,0)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,360,90)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,330,60)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,300,60)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,360,60)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,330,30)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,300,30)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,360,120)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,330,90)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,300,90)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,360,150)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,330,120)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,270,60)" />
+  <use href="#b" class="rd-w" transform="matrix(-1,0,0,1,270,30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,360,180)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,330,150)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,300,120)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,90)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,210,30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,60)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,360,0)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,360,210)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,330,180)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,300,150)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,120)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,210,60)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,90)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,360,240)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,330,210)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,300,180)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,150)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,210,90)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,120)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,360,-30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,300,-30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,330,-30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,-30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,0)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,-30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,0)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,210,0)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,240,30)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,330,-60)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,300,-60)" />
+  <use href="#b" class="bw" transform="matrix(-1,0,0,1,270,-60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,120,180)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,120,90)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,120,60)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,120,120)" />
+  <use href="#b" class="rd-w" transform="matrix(1,0,0,1,120,150)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,120,0)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,120,210)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,120,30)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,120,240)" />
+  <use href="#b" class="bw" transform="matrix(1,0,0,1,120,270)" />
+</svg>

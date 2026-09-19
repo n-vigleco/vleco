@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vLeco — vigle.co</title>
+    <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0a0c10',
+                            card: '#12161f',
+                            primary: '#66fcf1',
+                            dim: '#45a29e',
+                            accent: '#ff7b54',
+                            accentGlow: '#ff9e7d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0c10;
+            color: #c5c6c7;
+            overflow: hidden;
+        }
+
+        .glow-effect {
+            filter: drop-shadow(0 0 15px rgba(102, 252, 241, 0.45));
+        }
+
+        .braille-text {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Sans Braille", "Braille", monospace;
+            letter-spacing: 0.15em;
+        }
+
+        .glass-panel {
+            background: rgba(18, 22, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(102, 252, 241, 0.15);
+        }
+    </style>
+</head>
+<body class="relative w-screen h-screen flex flex-col justify-between items-center select-none font-sans text-slate-300">
+
+    <!-- Background Orbit Canvas -->
+    <canvas id="orbitCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+    <!-- MAIN HERO CONTENT (CENTERED) -->
+    <main class="relative z-10 my-auto flex flex-col items-center justify-center text-center px-4 max-w-2xl">
+        
+        <!-- Hexagonal Heart Logo -->
+        <div class="mb-5 transition-transform hover:scale-105 duration-300 cursor-pointer">
+            <svg class="w-20 h-20 fill-brand-primary glow-effect" viewBox="0 0 100 100">
+                <polygon points="25,30 30,27 35,30 35,36 30,39 25,36" />
+                <polygon points="25,45 30,42 35,45 35,51 30,54 25,51" />
+                <polygon points="38,22 43,19 48,22 48,28 43,31 38,28" />
+                <polygon points="38,37 43,34 48,37 48,43 43,46 38,43" />
+                <polygon points="38,52 43,49 48,52 48,58 43,61 38,58" />
+                <polygon points="51,30 56,27 61,30 61,36 56,39 51,36" />
+                <polygon points="51,45 56,42 61,45 61,51 56,54 51,51" />
+                <polygon points="51,60 56,57 61,60 61,66 56,69 51,66" />
+                <polygon points="51,75 56,72 61,75 61,81 56,84 51,81" />
+                <polygon points="64,22 69,19 74,22 74,28 69,31 64,28" />
+                <polygon points="64,37 69,34 74,37 74,43 69,46 64,43" />
+                <polygon points="64,52 69,49 74,52 74,58 69,61 64,58" />
+                <polygon points="77,30 82,27 87,30 87,36 82,39 77,36" />
+                <polygon points="77,45 82,42 87,45 87,51 82,54 77,51" />
+            </svg>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl tracking-widest text-white font-extralight mb-1">
+            v<span class="text-brand-primary font-bold text-6xl md:text-7xl">L</span>eco
+        </h1>
+
+        <p class="text-xs tracking-[0.3em] text-brand-dim uppercase font-mono mb-6">
+            vigle.co — Vitality &amp; System Standard
+        </p>
+
+        <p class="text-sm md:text-base leading-relaxed text-slate-300 font-light mb-4">
+            「Konstrui la nunon, tavolon post tavolo.」<br>
+            ノイズを減らし、情報と向き合い確実に情報を積み上げる。<br>
+            心地よい循環と、日常の余白を広げていく。
+        </p>
+
+        <div class="braille-text mt-3 space-y-1 text-xs tracking-widest text-brand-dim/70">
+            <p>⠅⠕⠍⠑⠝⠉⠕</p>
+            <p>⠧⠊⠛⠇⠑⠉⠕ ⠤ ⠧⠇⠑⠉⠕</p>
+            <p>⠼⠃⠚⠃⠋⠲⠼⠚⠊⠲⠼⠁⠊</p>
+        </div>
+    </main>
+
+    <!-- FOOTER WITH COPYRIGHT, LINKS & CONTROL TRIGGER -->
+    <footer class="relative z-10 w-full px-6 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-mono gap-3 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-transparent">
+        <div>
+            &copy; <span id="year">2026</span> <span class="text-slate-400 font-semibold">vLeco</span> / A new project by <span class="text-slate-400 font-semibold"><a href="https://asfact.jp/overview/" class="hover:text-brand-primary transition">株式会社asfact</a></span> / <a href="https://vigle.co" class="hover:text-brand-primary transition">vigle.co</a>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <a href="https://github.com/n-vigleco/vleco" target="_blank" rel="noopener" class="hover:text-brand-primary transition">GitHub</a>
+            <!-- <a href="https://o.vigle.co" target="_blank" rel="noopener" class="hover:text-brand-primary transition">Docs (o.vigle.co)</a> -->
+            <button id="toggleControlsBtn" class="hover:text-brand-accent transition flex items-center gap-1 border border-slate-700 hover:border-brand-accent px-2 py-1 rounded">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Orbit Settings
+            </button>
+        </div>
+    </footer>
+
+    <!-- CONTROL PANEL MODAL -->
+    <div id="controlPanel" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden bg-black/50">
+        <div class="glass-panel w-full max-w-md p-6 rounded-xl shadow-2xl text-slate-200 font-sans text-sm relative">
+            <button id="closeControlsBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
+            <h3 class="text-base font-semibold text-brand-primary mb-4 flex items-center gap-2">
+                Orbit Customization
+            </h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Max Display Words (<span id="maxDisplayVal">6</span>)</label>
+                    <input type="range" id="maxDisplayInput" min="1" max="12" step="1" value="6" class="w-full accent-brand-accent">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Orbit Radius Ratio (<span id="radiusVal">0.38</span>)</label>
+                    <input type="range" id="radiusInput" min="0.15" max="0.55" step="0.01" value="0.38" class="w-full accent-brand-accent">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Rotation Speed (<span id="speedVal">0.0012</span>)</label>
+                    <input type="range" id="speedInput" min="0.0002" max="0.005" step="0.0001" value="0.0012" class="w-full accent-brand-accent">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Accent Color Hex</label>
+                    <div class="flex items-center gap-3">
+                        <input type="color" id="colorInput" value="#ff7b54" class="w-8 h-8 rounded border-0 cursor-pointer">
+                        <span id="colorVal" class="font-mono text-xs text-brand-accent">#ff7b54</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Word Pool (Line separated)</label>
+                    <textarea id="wordsInput" rows="5" class="w-full bg-slate-900/90 border border-slate-700 rounded p-2 font-mono text-xs text-slate-200 focus:outline-none focus:border-brand-primary"></textarea>
+                </div>
+            </div>
+
+            <div class="mt-5 flex justify-end gap-2">
+                <button id="randomizeBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 px-3 py-1.5 rounded text-xs font-mono transition">
+                    Reshuffle
+                </button>
+                <button id="resetControlsBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 px-3 py-1.5 rounded text-xs font-mono transition">
+                    Reset
+                </button>
+                <button id="saveControlsBtn" class="bg-brand-primary/20 hover:bg-brand-primary/30 text-brand-primary border border-brand-primary/40 px-4 py-1.5 rounded text-xs font-mono transition">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* 1. BRAILLE DICTIONARY */
+        const BRAILLE_MAP = {
+            'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠠',
+            'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏',
+            'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭',
+            'y': '⠽', 'z': '⠵', 'ĉ': '⠡', 'ĝ': '⠱', 'ĥ': '⠳', 'ĵ': '⠺', 'ŝ': '⠮', 'ŭ': '⠬',
+            ' ': ' ', '-': '⠤', ',': '⠂', '!': '⠔'
+        };
+
+        function textToBraille(text) {
+            return text.toLowerCase().split('').map(ch => BRAILLE_MAP[ch] || ch).join('');
+        }
+
+        /* 2. KEYWORD POOL & CONFIGURATION */
+        const STORAGE_KEY = "vleco-orbit-settings";
+
+        const DEFAULT_WORD_POOL = [
+            "Ordigo",
+            "Nutro-Regado",
+            "Kuir-Artigo",
+            "Korp-Kultivado",
+            "Spatio-Optimumo",
+            "Ordo",
+            "Logit",
+            "Vivi la Nunon",
+            "Kultivi la Ĉirkaŭaĵon",
+            "Kompari kun Si Mem"
+        ];
+
+        const params = new URLSearchParams(window.location.search);
+
+        const defaultConfig = {
+            maxDisplay: 6,
+            minDisplay: 1,
+            maxDisplayLimit: 12,
+            radiusRatio: 0.38,
+            minRadiusRatio: 0.15,
+            maxRadiusRatio: 0.55,
+            speed: 0.0012,
+            minSpeed: 0.0002,
+            maxSpeed: 0.005,
+            accentColor: "#ff7b54"
+        };
+
+        let config = { ...defaultConfig };
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+
+        function parseNumber(value, fallback, min, max) {
+            const parsed = value === null || value === undefined ? NaN : Number(value);
+            return Number.isFinite(parsed) ? clamp(parsed, min, max) : fallback;
+        }
+
+        function parseNumberParam(name, fallback, min, max) {
+            const raw = params.get(name);
+            return parseNumber(raw, fallback, min, max);
+        }
+
+        function normalizeColor(value, fallback) {
+            if (!value) return fallback;
+            const raw = String(value);
+            const normalized = raw.startsWith("#") ? raw : `#${raw}`;
+            return /^#[0-9a-fA-F]{6}$/.test(normalized) ? normalized : fallback;
+        }
+
+        function parseColorParam(fallback) {
+            return normalizeColor(params.get("color"), fallback);
+        }
+
+        function parseWordsValue(raw) {
+            if (!raw) return null;
+            return String(raw).split(/[,|\n]/).map(word => word.trim()).filter(Boolean);
+        }
+
+        function parseWordsParam() {
+            return parseWordsValue(params.get("words"));
+        }
+
+        function normalizeKeywordData(data) {
+            const source = Array.isArray(data) ? data : data?.keywords;
+            if (!Array.isArray(source)) return [...DEFAULT_WORD_POOL];
+            const normalized = source
+                .map(item => typeof item === "string" ? item : item?.label)
+                .map(word => String(word || "").trim())
+                .filter(Boolean);
+            return normalized.length > 0 ? normalized : [...DEFAULT_WORD_POOL];
+        }
+
+        function normalizeConfigData(data) {
+            const orbit = data?.orbit || {};
+            return {
+                maxDisplay: parseNumber(orbit.maxDisplay, defaultConfig.maxDisplay, 1, 24),
+                minDisplay: parseNumber(orbit.minDisplay, defaultConfig.minDisplay, 1, 24),
+                maxDisplayLimit: parseNumber(orbit.maxDisplayLimit, defaultConfig.maxDisplayLimit, 1, 24),
+                radiusRatio: parseNumber(orbit.radiusRatio, defaultConfig.radiusRatio, 0.05, 0.8),
+                minRadiusRatio: parseNumber(orbit.minRadiusRatio, defaultConfig.minRadiusRatio, 0.05, 0.8),
+                maxRadiusRatio: parseNumber(orbit.maxRadiusRatio, defaultConfig.maxRadiusRatio, 0.05, 0.8),
+                speed: parseNumber(orbit.speed, defaultConfig.speed, 0.00005, 0.02),
+                minSpeed: parseNumber(orbit.minSpeed, defaultConfig.minSpeed, 0.00005, 0.02),
+                maxSpeed: parseNumber(orbit.maxSpeed, defaultConfig.maxSpeed, 0.00005, 0.02),
+                accentColor: normalizeColor(orbit.accentColor, defaultConfig.accentColor)
+            };
+        }
+
+        function readSavedSettings() {
+            try {
+                const storage = window.localStorage;
+                if (!storage) return null;
+                const saved = JSON.parse(storage.getItem(STORAGE_KEY) || "null");
+                if (!saved || typeof saved !== "object") return null;
+                return {
+                    config: saved.config || {},
+                    words: Array.isArray(saved.words) ? saved.words.map(String).filter(Boolean) : null
+                };
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function applyStoredConfig(storedConfig = {}) {
+            config.maxDisplay = parseNumber(storedConfig.maxDisplay, config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
+            config.radiusRatio = parseNumber(storedConfig.radiusRatio, config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
+            config.speed = parseNumber(storedConfig.speed, config.speed, config.minSpeed, config.maxSpeed);
+            config.accentColor = normalizeColor(storedConfig.accentColor, config.accentColor);
+        }
+
+        function applyQueryConfig() {
+            config.maxDisplay = parseNumberParam("max", config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
+            config.radiusRatio = parseNumberParam("radius", config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
+            config.speed = parseNumberParam("speed", config.speed, config.minSpeed, config.maxSpeed);
+            config.accentColor = parseColorParam(config.accentColor);
+        }
+
+        function persistSettings(pool) {
+            try {
+                const storage = window.localStorage;
+                if (!storage) return;
+                storage.setItem(STORAGE_KEY, JSON.stringify({
+                    config: {
+                        maxDisplay: config.maxDisplay,
+                        radiusRatio: config.radiusRatio,
+                        speed: config.speed,
+                        accentColor: config.accentColor
+                    },
+                    words: pool
+                }));
+            } catch (error) {
+                // URL query parameters still preserve shareable settings if storage is unavailable.
+            }
+        }
+
+        function clearPersistedSettings() {
+            try {
+                const storage = window.localStorage;
+                if (storage) storage.removeItem(STORAGE_KEY);
+            } catch (error) {
+                // Ignore storage errors so the visual controls remain usable.
+            }
+        }
+
+        let wordPool = [...DEFAULT_WORD_POOL];
+        let wordQueue = [];
+        let activeSlots = [];
+        let lastFrameAt = 0;
+        let siteDefaultConfig = { ...defaultConfig };
+        let siteDefaultWords = [...DEFAULT_WORD_POOL];
+
+        async function loadSiteConfig() {
+            try {
+                const response = await fetch("site-config.json", { cache: "no-store" });
+                if (!response.ok) throw new Error(`site-config.json ${response.status}`);
+                const data = await response.json();
+                return {
+                    config: normalizeConfigData(data),
+                    words: normalizeKeywordData(data)
+                };
+            } catch (error) {
+                try {
+                    const response = await fetch("keywords.json", { cache: "no-store" });
+                    if (!response.ok) throw new Error(`keywords.json ${response.status}`);
+                    return {
+                        config: { ...defaultConfig },
+                        words: normalizeKeywordData(await response.json())
+                    };
+                } catch (fallbackError) {
+                    return {
+                        config: { ...defaultConfig },
+                        words: [...DEFAULT_WORD_POOL]
+                    };
+                }
+            }
+        }
+
+        function shuffleWords(pool) {
+            const temp = [...pool];
+            for (let i = temp.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [temp[i], temp[j]] = [temp[j], temp[i]];
+            }
+            return temp;
+        }
+
+        function takeNextWord() {
+            if (wordQueue.length === 0) wordQueue = shuffleWords(wordPool);
+            return wordQueue.shift();
+        }
+
+        function createSlot(progress = 0) {
+            return {
+                word: takeNextWord(),
+                progress
+            };
+        }
+
+        function resetOrbit(nextPool = wordPool) {
+            wordPool = nextPool.length > 0 ? nextPool : [...DEFAULT_WORD_POOL];
+            wordQueue = shuffleWords(wordPool);
+            const visibleCount = Math.min(config.maxDisplay, wordPool.length, config.maxDisplayLimit);
+            activeSlots = Array.from({ length: visibleCount }, (_, index) => {
+                const progress = index / Math.max(visibleCount, 1);
+                return createSlot(progress);
+            });
+            lastFrameAt = performance.now();
+        }
+
+        function updateQueryFromControls(pool) {
+            const nextParams = new URLSearchParams();
+            nextParams.set("max", String(config.maxDisplay));
+            nextParams.set("radius", String(config.radiusRatio));
+            nextParams.set("speed", String(config.speed));
+            nextParams.set("color", config.accentColor.replace("#", ""));
+
+            if (pool.join("\n") !== siteDefaultWords.join("\n")) {
+                nextParams.set("words", pool.join(","));
+            }
+
+            const nextUrl = `${window.location.pathname}?${nextParams.toString()}`;
+            window.history.replaceState({}, "", nextUrl);
+        }
+
+        /* 3. ANIMATION ENGINE */
+        const canvas = document.getElementById('orbitCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let angle = 0;
+        let width = 0;
+        let height = 0;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawOrbit(timestamp = performance.now()) {
+            const delta = Math.min(timestamp - lastFrameAt, 64);
+            lastFrameAt = timestamp;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const minDim = Math.min(width, height);
+            const radius = minDim * config.radiusRatio;
+
+            // Subtle Ring Outline
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.strokeStyle = "rgba(255, 123, 84, 0.12)";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 8]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            const count = activeSlots.length;
+            if (count === 0) return;
+
+            for (const slot of activeSlots) {
+                slot.progress += config.speed * delta / 16.67;
+                if (slot.progress >= 1) {
+                    slot.word = takeNextWord();
+                    slot.progress = 0;
+                }
+
+                const currentAngle = -Math.PI / 2 + (slot.progress * Math.PI * 2);
+                const x = centerX + Math.cos(currentAngle) * radius;
+                const y = centerY + Math.sin(currentAngle) * radius;
+
+                const depth = Math.sin(currentAngle);
+                const edgeFade = Math.min(1, slot.progress / 0.12, (1 - slot.progress) / 0.12);
+                const alpha = (0.32 + (depth + 1) * 0.28) * edgeFade;
+                const scale = 0.85 + (depth + 1) * 0.15;
+
+                ctx.save();
+                ctx.translate(x, y);
+
+                const word = slot.word;
+                const braille = textToBraille(word);
+
+                ctx.fillStyle = config.accentColor;
+                ctx.globalAlpha = alpha;
+                ctx.font = `${16 * scale}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+                ctx.letterSpacing = `${0.06 * scale}em`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                
+                ctx.shadowColor = config.accentColor;
+                ctx.shadowBlur = 8 * alpha;
+
+                ctx.fillText(word, 0, -2);
+
+                ctx.fillStyle = "#e2e8f0";
+                ctx.globalAlpha = alpha * 0.75;
+                ctx.font = `${13.5 * scale}px "Noto Sans Braille", "Apple Color Emoji", monospace`;
+                ctx.letterSpacing = `${0.14 * scale}em`;
+                ctx.textBaseline = 'top';
+                ctx.shadowBlur = 0;
+                ctx.fillText(braille, 0, 6);
+                ctx.letterSpacing = "0px";
+
+                ctx.restore();
+            }
+
+            requestAnimationFrame(drawOrbit);
+        }
+
+        /* 4. CONTROL PANEL LOGIC */
+        const panel = document.getElementById('controlPanel');
+        const toggleBtn = document.getElementById('toggleControlsBtn');
+        const closeBtn = document.getElementById('closeControlsBtn');
+        const saveBtn = document.getElementById('saveControlsBtn');
+        const randomizeBtn = document.getElementById('randomizeBtn');
+        const resetControlsBtn = document.getElementById('resetControlsBtn');
+
+        const maxDisplayInput = document.getElementById('maxDisplayInput');
+        const radiusInput = document.getElementById('radiusInput');
+        const speedInput = document.getElementById('speedInput');
+        const colorInput = document.getElementById('colorInput');
+        const wordsInput = document.getElementById('wordsInput');
+
+        const maxDisplayVal = document.getElementById('maxDisplayVal');
+        const radiusVal = document.getElementById('radiusVal');
+        const speedVal = document.getElementById('speedVal');
+        const colorVal = document.getElementById('colorVal');
+
+        function syncControlsFromConfig() {
+            maxDisplayInput.min = String(config.minDisplay);
+            maxDisplayInput.max = String(config.maxDisplayLimit);
+            radiusInput.min = String(config.minRadiusRatio);
+            radiusInput.max = String(config.maxRadiusRatio);
+            speedInput.min = String(config.minSpeed);
+            speedInput.max = String(config.maxSpeed);
+
+            maxDisplayInput.value = String(config.maxDisplay);
+            radiusInput.value = String(config.radiusRatio);
+            speedInput.value = String(config.speed);
+            colorInput.value = config.accentColor;
+
+            maxDisplayVal.textContent = String(config.maxDisplay);
+            radiusVal.textContent = String(config.radiusRatio);
+            speedVal.textContent = String(config.speed);
+            colorVal.textContent = config.accentColor;
+        }
+
+        toggleBtn.addEventListener('click', () => panel.classList.remove('hidden'));
+        closeBtn.addEventListener('click', () => panel.classList.add('hidden'));
+
+        maxDisplayInput.addEventListener('input', (e) => maxDisplayVal.textContent = e.target.value);
+        radiusInput.addEventListener('input', (e) => radiusVal.textContent = e.target.value);
+        speedInput.addEventListener('input', (e) => speedVal.textContent = e.target.value);
+        colorInput.addEventListener('input', (e) => colorVal.textContent = e.target.value);
+
+        randomizeBtn.addEventListener('click', () => {
+            const lines = wordsInput.value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            config.maxDisplay = parseInt(maxDisplayInput.value, 10);
+            resetOrbit(lines);
+            updateQueryFromControls(lines);
+        });
+
+        saveBtn.addEventListener('click', () => {
+            config.maxDisplay = parseNumber(maxDisplayInput.value, config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
+            config.radiusRatio = parseNumber(radiusInput.value, config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
+            config.speed = parseNumber(speedInput.value, config.speed, config.minSpeed, config.maxSpeed);
+            config.accentColor = normalizeColor(colorInput.value, config.accentColor);
+            const lines = wordsInput.value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            resetOrbit(lines);
+            syncControlsFromConfig();
+            persistSettings(lines);
+            updateQueryFromControls(lines);
+
+            panel.classList.add('hidden');
+        });
+
+        resetControlsBtn.addEventListener('click', () => {
+            clearPersistedSettings();
+            config = { ...siteDefaultConfig };
+            const defaultWords = [...siteDefaultWords];
+            wordsInput.value = defaultWords.join('\n');
+            syncControlsFromConfig();
+            resetOrbit(defaultWords);
+            window.history.replaceState({}, "", window.location.pathname);
+        });
+
+        loadSiteConfig().then(siteConfig => {
+            config = { ...config, ...siteConfig.config };
+            siteDefaultConfig = { ...config };
+            siteDefaultWords = siteConfig.words.length > 0 ? siteConfig.words : [...DEFAULT_WORD_POOL];
+            let initialWords = siteConfig.words.length > 0 ? siteConfig.words : [...DEFAULT_WORD_POOL];
+
+            const saved = readSavedSettings();
+            if (saved) {
+                applyStoredConfig(saved.config);
+                if (saved.words && saved.words.length > 0) initialWords = saved.words;
+            }
+
+            const queryWords = parseWordsParam();
+            if (queryWords && queryWords.length > 0) initialWords = queryWords;
+            applyQueryConfig();
+
+            wordsInput.value = initialWords.join('\n');
+            syncControlsFromConfig();
+            resetOrbit(initialWords);
+            requestAnimationFrame(drawOrbit);
+        });
+    </script>
+</body>
+</html>

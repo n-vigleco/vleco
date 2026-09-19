@@ -1,0 +1,57 @@
+{
+  "orbit": {
+    "maxDisplay": 6,
+    "minDisplay": 1,
+    "maxDisplayLimit": 12,
+    "radiusRatio": 0.3,
+    "minRadiusRatio": 0.15,
+    "maxRadiusRatio": 0.55,
+    "speed": 0.0003,
+    "minSpeed": 0.0003,
+    "maxSpeed": 0.005,
+    "accentColor": "#ff7b54"
+  },
+  "keywords": [
+    {
+      "label": "Ordigo",
+      "ja": "整律 / 整理整頓"
+    },
+    {
+      "label": "Nutro-Regado",
+      "ja": "栄養管理"
+    },
+    {
+      "label": "Kuir-Artigo",
+      "ja": "調理加工"
+    },
+    {
+      "label": "Korp-Kultivado",
+      "ja": "身体開墾"
+    },
+    {
+      "label": "Spatio-Optimumo",
+      "ja": "空間効率"
+    },
+    {
+      "label": "Ordo",
+      "ja": "秩序 / 汎用構造"
+    },
+    {
+      "label": "Logit",
+      "ja": "記録 / 局所実装"
+    },
+    {
+      "label": "Vivi la Nunon",
+      "ja": "今を生きる"
+    },
+    {
+      "label": "Kultivi la Ĉirkaŭaĵon",
+      "ja": "身の回りを耕す"
+    },
+    {
+      "label": "Kompari kun Si Mem",
+      "ja": "自分自身と比較する"
+    }
+  ]
+}
+

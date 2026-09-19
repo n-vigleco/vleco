@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braille Tool — vLeco</title>
+    <link rel="icon" href="favicon.ico" sizes="48x48">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#0a0c10',
+                            panel: '#12161f',
+                            primary: '#66fcf1',
+                            dim: '#45a29e',
+                            accent: '#ff7b54'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Courier New', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #0a0c10;
+            color: #c5c6c7;
+        }
+
+        .braille-text {
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Sans Braille", "Braille", monospace;
+            letter-spacing: 0.08em;
+        }
+
+        .glass-panel {
+            background: rgba(18, 22, 31, 0.88);
+            border: 1px solid rgba(102, 252, 241, 0.16);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans text-slate-300">
+    <main class="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-5 py-6 md:py-10">
+        <header class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+                <a href="./" class="mb-5 inline-flex text-xs font-mono text-brand-dim hover:text-brand-primary">← vLeco</a>
+                <h1 class="text-3xl font-light tracking-wide text-white md:text-5xl">
+                    Braille Tool
+                </h1>
+                <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">
+                    Esperanto / Latin grade-1 style transliteration for quick vLeco naming checks.
+                </p>
+            </div>
+            <div class="rounded border border-brand-primary/20 px-3 py-2 font-mono text-xs text-brand-dim">
+                URL query keeps the current text
+            </div>
+        </header>
+
+        <section class="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+            <div class="glass-panel rounded-lg p-4">
+                <div class="mb-3 flex items-center justify-between gap-3">
+                    <label for="plainInput" class="font-mono text-xs uppercase tracking-wider text-brand-primary">Plain Text</label>
+                    <button id="sampleDateBtn" class="rounded border border-slate-700 px-2 py-1 font-mono text-xs text-slate-300 transition hover:border-brand-accent hover:text-brand-accent">
+                        2026.09.19
+                    </button>
+                </div>
+                <textarea id="plainInput" rows="10" class="min-h-56 w-full resize-y rounded border border-slate-700 bg-slate-950/80 p-3 font-mono text-sm leading-relaxed text-slate-100 outline-none transition focus:border-brand-primary"></textarea>
+            </div>
+
+            <div class="flex flex-row justify-center gap-2 md:flex-col">
+                <button id="encodeBtn" class="rounded border border-brand-primary/40 bg-brand-primary/15 px-4 py-2 font-mono text-xs text-brand-primary transition hover:bg-brand-primary/25">
+                    Encode →
+                </button>
+                <button id="decodeBtn" class="rounded border border-brand-accent/40 bg-brand-accent/15 px-4 py-2 font-mono text-xs text-brand-accent transition hover:bg-brand-accent/25">
+                    ← Decode
+                </button>
+            </div>
+
+            <div class="glass-panel rounded-lg p-4">
+                <div class="mb-3 flex items-center justify-between gap-3">
+                    <label for="brailleInput" class="font-mono text-xs uppercase tracking-wider text-brand-primary">Braille</label>
+                    <button id="sampleBrandBtn" class="rounded border border-slate-700 px-2 py-1 font-mono text-xs text-slate-300 transition hover:border-brand-accent hover:text-brand-accent">
+                        Launch Lines
+                    </button>
+                </div>
+                <textarea id="brailleInput" rows="10" class="braille-text min-h-56 w-full resize-y rounded border border-slate-700 bg-slate-950/80 p-3 text-2xl leading-relaxed text-slate-100 outline-none transition focus:border-brand-primary"></textarea>
+            </div>
+        </section>
+
+        <section class="mt-5 grid gap-4 md:grid-cols-2">
+            <div class="glass-panel rounded-lg p-4">
+                <h2 class="mb-3 font-mono text-xs uppercase tracking-wider text-brand-primary">Quick Results</h2>
+                <dl class="space-y-3 text-sm">
+                    <div>
+                        <dt class="font-mono text-xs text-slate-500">Komenco</dt>
+                        <dd class="braille-text mt-1 text-xl text-brand-primary">⠅⠕⠍⠑⠝⠉⠕</dd>
+                    </div>
+                    <div>
+                        <dt class="font-mono text-xs text-slate-500">Vigleco - vLeco</dt>
+                        <dd class="braille-text mt-1 text-xl text-brand-primary">⠧⠊⠛⠇⠑⠉⠕ ⠤ ⠧⠇⠑⠉⠕</dd>
+                    </div>
+                    <div>
+                        <dt class="font-mono text-xs text-slate-500">2026.09.19</dt>
+                        <dd id="dateBraille" class="braille-text mt-1 text-xl text-brand-primary"></dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="glass-panel rounded-lg p-4">
+                <h2 class="mb-3 font-mono text-xs uppercase tracking-wider text-brand-primary">Notes</h2>
+                <ul class="space-y-2 text-sm leading-relaxed text-slate-400">
+                    <li>Numbers use the number sign <span class="braille-text text-brand-primary">⠼</span> before each digit group.</li>
+                    <li>Esperanto letters use dedicated cells for ĉ, ĝ, ĥ, ĵ, ŝ, and ŭ.</li>
+                    <li>This is a practical transliteration helper, not a full contracted-braille translator.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const LETTER_TO_BRAILLE = {
+            a: "⠁", b: "⠃", c: "⠉", ĉ: "⠩", d: "⠙", e: "⠑", f: "⠋",
+            g: "⠛", ĝ: "⠻", h: "⠓", ĥ: "⠳", i: "⠊", j: "⠚", ĵ: "⠺",
+            k: "⠅", l: "⠇", m: "⠍", n: "⠝", o: "⠕", p: "⠏", q: "⠟",
+            r: "⠗", s: "⠎", ŝ: "⠮", t: "⠞", u: "⠥", ŭ: "⠬", v: "⠧",
+            w: "⠾", x: "⠭", y: "⠽", z: "⠵"
+        };
+
+        const DIGIT_TO_BRAILLE = {
+            "1": "⠁", "2": "⠃", "3": "⠉", "4": "⠙", "5": "⠑",
+            "6": "⠋", "7": "⠛", "8": "⠓", "9": "⠊", "0": "⠚"
+        };
+
+        const PUNCT_TO_BRAILLE = {
+            " ": " ", "\n": "\n", "-": "⠤", ".": "⠲", ",": "⠂", ":": "⠒",
+            ";": "⠆", "?": "⠦", "!": "⠖", "/": "⠌", "(": "⠐⠣", ")": "⠐⠜",
+            "[": "⠐⠣", "]": "⠐⠜", "\"": "⠦", "'": "⠄", "_": "⠸⠤",
+            "@": "⠈⠁", "#": "⠼", "&": "⠯", "+": "⠬", "=": "⠿"
+        };
+
+        const BRAILLE_TO_LETTER = Object.fromEntries(
+            Object.entries(LETTER_TO_BRAILLE).map(([letter, braille]) => [braille, letter])
+        );
+        const BRAILLE_TO_DIGIT = Object.fromEntries(
+            Object.entries(DIGIT_TO_BRAILLE).map(([digit, braille]) => [braille, digit])
+        );
+        const BRAILLE_TO_PUNCT = Object.fromEntries(
+            Object.entries(PUNCT_TO_BRAILLE)
+                .filter(([, braille]) => braille.length === 1)
+                .map(([plain, braille]) => [braille, plain])
+        );
+
+        const plainInput = document.getElementById("plainInput");
+        const brailleInput = document.getElementById("brailleInput");
+        const encodeBtn = document.getElementById("encodeBtn");
+        const decodeBtn = document.getElementById("decodeBtn");
+        const sampleDateBtn = document.getElementById("sampleDateBtn");
+        const sampleBrandBtn = document.getElementById("sampleBrandBtn");
+        const dateBraille = document.getElementById("dateBraille");
+
+        function encodeText(text) {
+            let output = "";
+            let inNumber = false;
+
+            for (const char of text) {
+                if (DIGIT_TO_BRAILLE[char]) {
+                    if (!inNumber) output += "⠼";
+                    output += DIGIT_TO_BRAILLE[char];
+                    inNumber = true;
+                    continue;
+                }
+
+                inNumber = false;
+                const lower = char.toLocaleLowerCase();
+                output += LETTER_TO_BRAILLE[lower] || PUNCT_TO_BRAILLE[char] || char;
+            }
+
+            return output;
+        }
+
+        function decodeBraille(text) {
+            let output = "";
+            let numberMode = false;
+
+            for (const char of text) {
+                if (char === "⠼") {
+                    numberMode = true;
+                    continue;
+                }
+
+                if (numberMode && BRAILLE_TO_DIGIT[char]) {
+                    output += BRAILLE_TO_DIGIT[char];
+                    continue;
+                }
+
+                numberMode = false;
+                output += BRAILLE_TO_LETTER[char] || BRAILLE_TO_PUNCT[char] || char;
+            }
+
+            return output;
+        }
+
+        function updateUrl(mode, value) {
+            const query = new URLSearchParams();
+            query.set("mode", mode);
+            query.set("text", value);
+            window.history.replaceState({}, "", `${window.location.pathname}?${query.toString()}`);
+        }
+
+        function encodeAndSync() {
+            brailleInput.value = encodeText(plainInput.value);
+            updateUrl("encode", plainInput.value);
+        }
+
+        function decodeAndSync() {
+            plainInput.value = decodeBraille(brailleInput.value);
+            updateUrl("decode", brailleInput.value);
+        }
+
+        encodeBtn.addEventListener("click", encodeAndSync);
+        decodeBtn.addEventListener("click", decodeAndSync);
+        plainInput.addEventListener("input", encodeAndSync);
+        brailleInput.addEventListener("input", decodeAndSync);
+
+        sampleDateBtn.addEventListener("click", () => {
+            plainInput.value = "2026.09.19";
+            encodeAndSync();
+        });
+
+        sampleBrandBtn.addEventListener("click", () => {
+            plainInput.value = "Komenco\nVigleco - vLeco\n2026.09.19";
+            encodeAndSync();
+        });
+
+        dateBraille.textContent = encodeText("2026.09.19");
+
+        const params = new URLSearchParams(window.location.search);
+        const initialMode = params.get("mode") || "encode";
+        const initialText = params.get("text") || "2026.09.19";
+
+        if (initialMode === "decode") {
+            brailleInput.value = initialText;
+            plainInput.value = decodeBraille(initialText);
+        } else {
+            plainInput.value = initialText;
+            brailleInput.value = encodeText(initialText);
+        }
+    </script>
+</body>
+</html>
