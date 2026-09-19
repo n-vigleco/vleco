@@ -479,6 +479,7 @@
             const centerY = height / 2;
             const minDim = Math.min(width, height);
             const radius = minDim * config.radiusRatio;
+            const isMobileOrbit = width < 640;
 
             // Subtle Ring Outline
             ctx.beginPath();
@@ -514,25 +515,28 @@
                 const word = slot.word;
                 const braille = textToBraille(word);
 
-                ctx.fillStyle = config.accentColor;
-                ctx.globalAlpha = alpha;
-                ctx.font = `${16 * scale}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-                ctx.letterSpacing = `${0.06 * scale}em`;
                 ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
-                
-                ctx.shadowColor = config.accentColor;
-                ctx.shadowBlur = 8 * alpha;
 
-                ctx.fillText(word, 0, -2);
+                if (!isMobileOrbit) {
+                    ctx.fillStyle = config.accentColor;
+                    ctx.globalAlpha = alpha;
+                    ctx.font = `${16 * scale}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+                    ctx.letterSpacing = `${0.06 * scale}em`;
+                    ctx.textBaseline = 'bottom';
+
+                    ctx.shadowColor = config.accentColor;
+                    ctx.shadowBlur = 8 * alpha;
+
+                    ctx.fillText(word, 0, -2);
+                }
 
                 ctx.fillStyle = "#e2e8f0";
-                ctx.globalAlpha = alpha * 0.75;
-                ctx.font = `${13.5 * scale}px "Noto Sans Braille", "Apple Color Emoji", monospace`;
-                ctx.letterSpacing = `${0.14 * scale}em`;
-                ctx.textBaseline = 'top';
+                ctx.globalAlpha = alpha * (isMobileOrbit ? 0.62 : 0.75);
+                ctx.font = `${(isMobileOrbit ? 10 : 13.5) * scale}px "Noto Sans Braille", "Apple Color Emoji", monospace`;
+                ctx.letterSpacing = `${(isMobileOrbit ? 0.1 : 0.14) * scale}em`;
+                ctx.textBaseline = isMobileOrbit ? 'middle' : 'top';
                 ctx.shadowBlur = 0;
-                ctx.fillText(braille, 0, 6);
+                ctx.fillText(braille, 0, isMobileOrbit ? 0 : 6);
                 ctx.letterSpacing = "0px";
 
                 ctx.restore();
