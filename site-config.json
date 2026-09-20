@@ -9,6 +9,9 @@
     "speed": 0.0003,
     "minSpeed": 0.0003,
     "maxSpeed": 0.005,
+    "contentOffsetY": -4,
+    "minContentOffsetY": -18,
+    "maxContentOffsetY": 12,
     "accentColor": "#ff7b54"
   },
   "keywords": [
@@ -54,4 +57,3 @@
     }
   ]
 }
-

@@ -70,10 +70,16 @@
         }
     </script>
     <style>
+        :root {
+            --hero-offset-y: -4vh;
+        }
+
         body {
             background-color: #0a0c10;
             color: #c5c6c7;
             overflow: hidden;
+            min-height: 100vh;
+            min-height: 100svh;
         }
 
         .glow-effect {
@@ -90,18 +96,180 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(102, 252, 241, 0.15);
         }
+
+        .hero-stage {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            transform: translate3d(0, var(--hero-offset-y), 0);
+            transition: transform 300ms ease;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(100%, 42rem);
+            padding: 0 1rem;
+            pointer-events: auto;
+        }
+
+        .crystal-field,
+        .crystal-surface,
+        .crystal-facet {
+            clip-path: polygon(25% 3%, 75% 3%, 98% 50%, 75% 97%, 25% 97%, 2% 50%);
+        }
+
+        .crystal-field {
+            position: absolute;
+            z-index: 1;
+            width: min(68vw, 35rem);
+            aspect-ratio: 1.16;
+            background: rgba(102, 252, 241, 0.24);
+            filter: drop-shadow(0 0 28px rgba(102, 252, 241, 0.11));
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .crystal-surface {
+            position: absolute;
+            inset: 1px;
+            overflow: hidden;
+            background: rgba(10, 12, 16, 0.78);
+            backdrop-filter: blur(4px);
+        }
+
+        .crystal-facet {
+            position: absolute;
+            inset: 0;
+        }
+
+        .crystal-facet:nth-child(1) {
+            background: rgba(102, 252, 241, 0.045);
+            clip-path: polygon(25% 3%, 50% 50%, 75% 3%);
+        }
+
+        .crystal-facet:nth-child(2) {
+            background: rgba(69, 162, 158, 0.035);
+            clip-path: polygon(2% 50%, 25% 3%, 50% 50%);
+        }
+
+        .crystal-facet:nth-child(3) {
+            background: rgba(226, 232, 240, 0.025);
+            clip-path: polygon(75% 3%, 98% 50%, 50% 50%);
+        }
+
+        .crystal-facet:nth-child(4) {
+            background: rgba(69, 162, 158, 0.055);
+            clip-path: polygon(2% 50%, 50% 50%, 25% 97%);
+        }
+
+        .crystal-facet:nth-child(5) {
+            background: rgba(102, 252, 241, 0.025);
+            clip-path: polygon(50% 50%, 98% 50%, 75% 97%);
+        }
+
+        .crystal-facet:nth-child(6) {
+            background: rgba(226, 232, 240, 0.035);
+            clip-path: polygon(25% 97%, 50% 50%, 75% 97%);
+        }
+
+        .footer-compact {
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .crystal-field {
+                width: min(90vw, 28rem);
+            }
+        }
+
+        @media (max-height: 700px), (max-width: 640px) {
+            .hero-logo {
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-logo svg {
+                width: 3.5rem;
+                height: 3.5rem;
+            }
+
+            .hero-title {
+                margin-bottom: 0;
+                font-size: 2.5rem;
+                line-height: 1;
+            }
+
+            .hero-title .hero-letter {
+                font-size: 3rem;
+            }
+
+            .hero-tagline {
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-message {
+                margin-bottom: 0.5rem;
+                font-size: 0.78rem;
+                line-height: 1.5;
+            }
+
+            .hero-braille {
+                margin-top: 0.5rem;
+                font-size: 0.68rem;
+                line-height: 1.3;
+            }
+
+            .crystal-field {
+                width: min(62vw, 27rem);
+            }
+
+            .site-footer {
+                justify-content: center;
+                padding: 0.45rem 1rem;
+            }
+
+            .footer-full,
+            .footer-actions {
+                display: none !important;
+            }
+
+            .footer-compact {
+                display: block;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .crystal-field {
+                width: min(92vw, 28rem);
+                aspect-ratio: 1;
+            }
+        }
     </style>
 </head>
-<body class="relative w-screen h-screen flex flex-col justify-between items-center select-none font-sans text-slate-300">
+<body class="relative w-screen h-screen select-none font-sans text-slate-300">
 
     <!-- Background Orbit Canvas -->
     <canvas id="orbitCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
     <!-- MAIN HERO CONTENT (CENTERED) -->
-    <main class="relative z-10 my-auto flex flex-col items-center justify-center text-center px-4 max-w-2xl">
+    <main id="heroStage" class="hero-stage z-10 text-center">
+        <div class="crystal-field" aria-hidden="true">
+            <div class="crystal-surface">
+                <span class="crystal-facet"></span>
+                <span class="crystal-facet"></span>
+                <span class="crystal-facet"></span>
+                <span class="crystal-facet"></span>
+                <span class="crystal-facet"></span>
+                <span class="crystal-facet"></span>
+            </div>
+        </div>
+
+        <div class="hero-content flex flex-col items-center justify-center">
         
         <!-- Hexagonal Heart Logo -->
-        <div class="mb-5 transition-transform hover:scale-105 duration-300 cursor-pointer">
+        <div class="hero-logo mb-5 transition-transform hover:scale-105 duration-300 cursor-pointer">
             <svg class="w-20 h-20 fill-brand-primary glow-effect" viewBox="0 0 100 100">
                 <polygon points="25,30 30,27 35,30 35,36 30,39 25,36" />
                 <polygon points="25,45 30,42 35,45 35,51 30,54 25,51" />
@@ -120,34 +288,37 @@
             </svg>
         </div>
 
-        <h1 class="text-5xl md:text-6xl tracking-widest text-white font-extralight mb-1">
-            v<span class="text-brand-primary font-bold text-6xl md:text-7xl">L</span>eco
+        <h1 class="hero-title text-5xl md:text-6xl tracking-widest text-white font-extralight mb-1">
+            v<span class="hero-letter text-brand-primary font-bold text-6xl md:text-7xl">L</span>eco
         </h1>
 
-        <p class="text-xs tracking-[0.3em] text-brand-dim uppercase font-mono mb-6">
+        <p class="hero-tagline text-xs tracking-[0.3em] text-brand-dim uppercase font-mono mb-6">
             vigle.co — Vitality &amp; System Standard
         </p>
 
-        <p class="text-sm md:text-base leading-relaxed text-slate-300 font-light mb-4">
+        <p class="hero-message text-sm md:text-base leading-relaxed text-slate-300 font-light mb-4">
             現実に多角的に向き合い、情報を整理整頓。<br>
             実装を最適化し、利便性と精度を高める。<br>
             心地よい体験で、日常の余白を広げていく。
         </p>
 
-        <div class="braille-text mt-3 space-y-1 text-[13px] font-semibold tracking-widest text-brand-dim/75 md:text-sm">
+        <div class="hero-braille braille-text mt-3 space-y-1 text-[13px] font-semibold tracking-widest text-brand-dim/75 md:text-sm">
             <p>⠅⠕⠍⠑⠝⠉⠕</p>
             <p>⠧⠊⠛⠇⠑⠉⠕ ⠤ ⠧⠇⠑⠉⠕</p>
             <p>⠼⠃⠚⠃⠋⠲⠼⠚⠊⠲⠼⠁⠊</p>
         </div>
+        </div>
     </main>
 
     <!-- FOOTER WITH COPYRIGHT, LINKS & CONTROL TRIGGER -->
-    <footer class="relative z-10 w-full px-6 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-mono gap-3 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-transparent">
-        <div>
+    <footer class="site-footer absolute bottom-0 left-0 z-10 w-full px-6 py-4 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 font-mono gap-3 bg-gradient-to-t from-brand-bg via-brand-bg/80 to-transparent">
+        <div class="footer-full">
             &copy; <span id="year">2026</span> <span class="text-slate-400 font-semibold">vLeco</span> / A new project by <span class="text-slate-400 font-semibold"><a href="https://asfact.jp/overview/" class="hover:text-brand-primary transition">株式会社asfact</a></span> / <a href="https://vigle.co" class="hover:text-brand-primary transition">vigle.co</a>
         </div>
 
-        <div class="flex items-center gap-6">
+        <div class="footer-compact">&copy; 2026 <span class="text-slate-400 font-semibold">vLeco</span></div>
+
+        <div class="footer-actions flex items-center gap-6">
             <a href="https://github.com/n-vigleco/vleco" target="_blank" rel="noopener" class="hover:text-brand-primary transition">GitHub</a>
             <!-- <a href="https://o.vigle.co" target="_blank" rel="noopener" class="hover:text-brand-primary transition">Docs (o.vigle.co)</a> -->
             <button id="toggleControlsBtn" class="hover:text-brand-accent transition flex items-center gap-1 border border-slate-700 hover:border-brand-accent px-2 py-1 rounded">
@@ -179,6 +350,11 @@
                 <div>
                     <label class="block text-xs font-mono text-slate-400 mb-1">Rotation Speed (<span id="speedVal">0.0012</span>)</label>
                     <input type="range" id="speedInput" min="0.0002" max="0.005" step="0.0001" value="0.0012" class="w-full accent-brand-accent">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">Content Vertical Position (<span id="offsetVal">-4</span>vh)</label>
+                    <input type="range" id="offsetInput" min="-18" max="12" step="1" value="-4" class="w-full accent-brand-accent">
                 </div>
 
                 <div>
@@ -251,6 +427,9 @@
             speed: 0.0012,
             minSpeed: 0.0002,
             maxSpeed: 0.005,
+            contentOffsetY: -4,
+            minContentOffsetY: -18,
+            maxContentOffsetY: 12,
             accentColor: "#ff7b54"
         };
 
@@ -311,6 +490,9 @@
                 speed: parseNumber(orbit.speed, defaultConfig.speed, 0.00005, 0.02),
                 minSpeed: parseNumber(orbit.minSpeed, defaultConfig.minSpeed, 0.00005, 0.02),
                 maxSpeed: parseNumber(orbit.maxSpeed, defaultConfig.maxSpeed, 0.00005, 0.02),
+                contentOffsetY: parseNumber(orbit.contentOffsetY, defaultConfig.contentOffsetY, -30, 30),
+                minContentOffsetY: parseNumber(orbit.minContentOffsetY, defaultConfig.minContentOffsetY, -30, 30),
+                maxContentOffsetY: parseNumber(orbit.maxContentOffsetY, defaultConfig.maxContentOffsetY, -30, 30),
                 accentColor: normalizeColor(orbit.accentColor, defaultConfig.accentColor)
             };
         }
@@ -334,6 +516,7 @@
             config.maxDisplay = parseNumber(storedConfig.maxDisplay, config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
             config.radiusRatio = parseNumber(storedConfig.radiusRatio, config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
             config.speed = parseNumber(storedConfig.speed, config.speed, config.minSpeed, config.maxSpeed);
+            config.contentOffsetY = parseNumber(storedConfig.contentOffsetY, config.contentOffsetY, config.minContentOffsetY, config.maxContentOffsetY);
             config.accentColor = normalizeColor(storedConfig.accentColor, config.accentColor);
         }
 
@@ -341,6 +524,7 @@
             config.maxDisplay = parseNumberParam("max", config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
             config.radiusRatio = parseNumberParam("radius", config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
             config.speed = parseNumberParam("speed", config.speed, config.minSpeed, config.maxSpeed);
+            config.contentOffsetY = parseNumberParam("offset", config.contentOffsetY, config.minContentOffsetY, config.maxContentOffsetY);
             config.accentColor = parseColorParam(config.accentColor);
         }
 
@@ -353,6 +537,7 @@
                         maxDisplay: config.maxDisplay,
                         radiusRatio: config.radiusRatio,
                         speed: config.speed,
+                        contentOffsetY: config.contentOffsetY,
                         accentColor: config.accentColor
                     },
                     words: pool
@@ -441,6 +626,7 @@
             nextParams.set("max", String(config.maxDisplay));
             nextParams.set("radius", String(config.radiusRatio));
             nextParams.set("speed", String(config.speed));
+            nextParams.set("offset", String(config.contentOffsetY));
             nextParams.set("color", config.accentColor.replace("#", ""));
 
             if (pool.join("\n") !== siteDefaultWords.join("\n")) {
@@ -469,6 +655,10 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+        function applyContentOffset() {
+            document.documentElement.style.setProperty('--hero-offset-y', `${config.contentOffsetY}vh`);
+        }
+
         function drawOrbit(timestamp = performance.now()) {
             const delta = Math.min(timestamp - lastFrameAt, 64);
             lastFrameAt = timestamp;
@@ -476,7 +666,7 @@
             ctx.clearRect(0, 0, width, height);
 
             const centerX = width / 2;
-            const centerY = height / 2;
+            const centerY = height / 2 + height * config.contentOffsetY / 100;
             const minDim = Math.min(width, height);
             const radius = minDim * config.radiusRatio;
             const isMobileOrbit = width < 640;
@@ -556,12 +746,14 @@
         const maxDisplayInput = document.getElementById('maxDisplayInput');
         const radiusInput = document.getElementById('radiusInput');
         const speedInput = document.getElementById('speedInput');
+        const offsetInput = document.getElementById('offsetInput');
         const colorInput = document.getElementById('colorInput');
         const wordsInput = document.getElementById('wordsInput');
 
         const maxDisplayVal = document.getElementById('maxDisplayVal');
         const radiusVal = document.getElementById('radiusVal');
         const speedVal = document.getElementById('speedVal');
+        const offsetVal = document.getElementById('offsetVal');
         const colorVal = document.getElementById('colorVal');
 
         function syncControlsFromConfig() {
@@ -571,16 +763,21 @@
             radiusInput.max = String(config.maxRadiusRatio);
             speedInput.min = String(config.minSpeed);
             speedInput.max = String(config.maxSpeed);
+            offsetInput.min = String(config.minContentOffsetY);
+            offsetInput.max = String(config.maxContentOffsetY);
 
             maxDisplayInput.value = String(config.maxDisplay);
             radiusInput.value = String(config.radiusRatio);
             speedInput.value = String(config.speed);
+            offsetInput.value = String(config.contentOffsetY);
             colorInput.value = config.accentColor;
 
             maxDisplayVal.textContent = String(config.maxDisplay);
             radiusVal.textContent = String(config.radiusRatio);
             speedVal.textContent = String(config.speed);
+            offsetVal.textContent = String(config.contentOffsetY);
             colorVal.textContent = config.accentColor;
+            applyContentOffset();
         }
 
         toggleBtn.addEventListener('click', () => panel.classList.remove('hidden'));
@@ -589,6 +786,10 @@
         maxDisplayInput.addEventListener('input', (e) => maxDisplayVal.textContent = e.target.value);
         radiusInput.addEventListener('input', (e) => radiusVal.textContent = e.target.value);
         speedInput.addEventListener('input', (e) => speedVal.textContent = e.target.value);
+        offsetInput.addEventListener('input', (e) => {
+            offsetVal.textContent = e.target.value;
+            document.documentElement.style.setProperty('--hero-offset-y', `${e.target.value}vh`);
+        });
         colorInput.addEventListener('input', (e) => colorVal.textContent = e.target.value);
 
         randomizeBtn.addEventListener('click', () => {
@@ -602,6 +803,7 @@
             config.maxDisplay = parseNumber(maxDisplayInput.value, config.maxDisplay, config.minDisplay, config.maxDisplayLimit);
             config.radiusRatio = parseNumber(radiusInput.value, config.radiusRatio, config.minRadiusRatio, config.maxRadiusRatio);
             config.speed = parseNumber(speedInput.value, config.speed, config.minSpeed, config.maxSpeed);
+            config.contentOffsetY = parseNumber(offsetInput.value, config.contentOffsetY, config.minContentOffsetY, config.maxContentOffsetY);
             config.accentColor = normalizeColor(colorInput.value, config.accentColor);
             const lines = wordsInput.value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
             resetOrbit(lines);
