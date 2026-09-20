@@ -9,11 +9,14 @@
 
 **vLeco** (ブイレコ) は、現代人の生活・身体・ITシステムにおける雑音や無駄（Vanofino）を断絶し、本質的な生命力（Vigleco）を取り戻すための、ブランドおよび統合システムエコシステムです。
 
+`vLeco`、`ブイレコ`、`vigleco`、`vigle.co` は同一の公開ブランドおよび公式ドメインを指します。`vLeco` は商標申請中のブランド名です。
 
 * **Official Domain:** [https://vigle.co](https://vigle.co)
 * **Standard Brand Mark:** `vLeco`（小文字の `v` と大文字の `L` による視覚的構造）
 * **Current Operating Entity:** **株式会社asfact**
 * **Project Name:** **vLeco** (フリガナ: ブイレコ)
+* **Alternate Search Terms:** `ブイレコ`, `vigleco`, `Vigleco`, `vigle.co`
+* **Public Repository:** [https://github.com/n-vigleco/vleco](https://github.com/n-vigleco/vleco)
 
 ---
 
@@ -30,8 +33,8 @@
    - フッターの `Orbit Settings` より、最大表示数・回転速度・半径・コンテンツ上下位置・アクセントカラーの即時書き換えが可能。
    - 変更した設定はURLクエリに反映されるため、同じ表示状態をURLで共有できます。
 4. **Keyword Definition**
-   - 表示キーワードと初期表示設定は `site-config.json` で管理します。
-   - `keywords.json` は旧形式のフォールバックとして残しています。
+   - 表示キーワードと初期表示設定は `assets/data/site-config.json` で管理します。
+   - `assets/data/keywords.json` は旧形式のフォールバックとして残しています。
    - アクセス時にランダム順へ並び替え、各キーワードが一周するとフェードアウトして次のキーワードへ切り替わります。
    - Orbit Settingsで変更した内容はブラウザに保存され、次回アクセス時にも反映されます。
 5. **Braille Tool**
